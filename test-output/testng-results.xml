@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-08-31T20:45:54 IST" name="Suite" finished-at="2025-08-31T20:45:57 IST" duration-ms="2966">
+    <groups>
+    </groups>
+    <test started-at="2025-08-31T20:45:54 IST" name="Default test" finished-at="2025-08-31T20:45:57 IST" duration-ms="2966">
+      <class name="test.BrokenLinks">
+        <test-method is-config="true" signature="browsersetup()[pri:0, instance:test.BrokenLinks@36b4fe2a]" started-at="2025-08-31T20:45:54 IST" name="browsersetup" finished-at="2025-08-31T20:45:55 IST" duration-ms="1563" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- browsersetup -->
+        <test-method signature="name()[pri:0, instance:test.BrokenLinks@36b4fe2a]" started-at="2025-08-31T20:45:55 IST" name="name" finished-at="2025-08-31T20:45:57 IST" duration-ms="1290" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- name -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:test.BrokenLinks@36b4fe2a]" started-at="2025-08-31T20:45:57 IST" name="tearDown" finished-at="2025-08-31T20:45:57 IST" duration-ms="66" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- test.BrokenLinks -->
+    </test> <!-- Default test -->
+  </suite> <!-- Suite -->
+</testng-results>
