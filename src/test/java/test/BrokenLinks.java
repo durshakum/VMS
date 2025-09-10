@@ -77,7 +77,6 @@ public void name() throws InterruptedException {
 	 Thread.sleep(3);
 	 driver.switchTo().newWindow(WindowType.TAB);
 	 Thread.sleep(10);
-	 Thread.sleep(30);
 	 Set<String> handleSet =driver.getWindowHandles();
 	 System.out.println("Size of window is "+handleSet.size());
 	 Iterator iterator = handleSet.iterator();
