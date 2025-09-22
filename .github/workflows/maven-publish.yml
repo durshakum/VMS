@@ -2,7 +2,7 @@ name: Selenium Java TestNG CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
  
 jobs:
   test:
