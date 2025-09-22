@@ -88,11 +88,12 @@ public class ExtentReportListener  implements ITestListener {
 
      @Override
      public void onTestSkipped(ITestResult result) {
-         test.get().log(Status.SKIP, "Test Skipped");;
+         test.get().log(Status.SKIP, "Test Skipped");
      }
 
      @Override
      public void onFinish(ITestContext context) {
+    	 test.remove();
          extent.flush();// Flush the reports at the end of the test suite
      }
 
