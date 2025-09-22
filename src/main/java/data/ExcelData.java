@@ -23,7 +23,7 @@ public class ExcelData {
 
 	public static List<Hashtable<String,String>> excelling() throws IOException {
 		List<Hashtable<String,String>> lst = new ArrayList<>();
-		int arr[];
+//		int arr[];
 		try {
 			FileInputStream fis = new FileInputStream(
 					"C:\\Users\\admin\\eclipse-workspace\\selenium-java\\src\\test\\resources\\data\\testdata.xlsx");
