@@ -93,6 +93,7 @@ public class ExtentReportListener  implements ITestListener {
 
      @Override
      public void onFinish(ITestContext context) {
+    	 test.remove();
          extent.flush();// Flush the reports at the end of the test suite
      }
 
