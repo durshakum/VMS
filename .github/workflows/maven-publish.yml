@@ -59,7 +59,7 @@ jobs:
 
       # 7. (Optional) Upload Screenshots (if your tests save them to /target/screenshots)
       - name: 🖼️ Upload Screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
@@ -68,7 +68,7 @@ jobs:
 
       # 8. (Optional) Upload HTML TestNG Report
       - name: 📊 Upload TestNG HTML Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: testng-html-report
