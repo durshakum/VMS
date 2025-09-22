@@ -4,7 +4,7 @@ name: Selenium TestNG Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ master ]
   pull_request:
     branches: [ main ]
   workflow_dispatch: # Allows manual run from Actions tab
