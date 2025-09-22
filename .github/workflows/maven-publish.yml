@@ -51,7 +51,7 @@ jobs:
 
       # 6. (Optional) Upload Surefire Reports
       - name: 📄 Upload Test Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always() # Always upload, even if tests fail
         with:
           name: test-reports
