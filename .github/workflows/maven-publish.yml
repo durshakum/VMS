@@ -1,31 +1,76 @@
-name: Selenium Java TestNG CI
+# .github/workflows/selenium-testng.yml
+
+name: Selenium TestNG Tests
 
 on:
   push:
-    branches: [ master ]
- 
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allows manual run from Actions tab
+
 jobs:
-  test:
+  selenium-tests:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # 1. Checkout code
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      # 2. Set up JDK 17 (or 11)
+      - name: 🔧 Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Install Google Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo apt install -y ./google-chrome-stable_current_amd64.deb
-        rm google-chrome-stable_current_amd64.deb
+      # 3. Cache Maven dependencies (~/.m2)
+      - name: 💾 Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-    - name: Build and run tests with Maven
-      run: mvn clean test
+      # 4. Install Chrome (for Selenium WebDriver)
+      - name: 🌐 Install Chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # 5. Run Maven Tests (TestNG via Surefire)
+      - name: 🧪 Run Selenium Tests with Maven
+        run: mvn clean test
+        env:
+          # Optional: Set headless mode explicitly if your code doesn't
+          HEADLESS: true
+
+      # 6. (Optional) Upload Surefire Reports
+      - name: 📄 Upload Test Reports
+        uses: actions/upload-artifact@v3
+        if: always() # Always upload, even if tests fail
+        with:
+          name: test-reports
+          path: target/surefire-reports/
+
+      # 7. (Optional) Upload Screenshots (if your tests save them to /target/screenshots)
+      - name: 🖼️ Upload Screenshots
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: screenshots
+          path: target/screenshots/
+          if-no-files-found: ignore # Don't fail if no screenshots
+
+      # 8. (Optional) Upload HTML TestNG Report
+      - name: 📊 Upload TestNG HTML Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: testng-html-report
+          path: target/test-output/index.html
+          if-no-files-found: ignore
